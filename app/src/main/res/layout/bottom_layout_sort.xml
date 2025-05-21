@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_layout_border">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sort_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Sắp xếp theo"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <worker8.com.github.radiogroupplus.RadioGroupPlus
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sort_by">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Xếp hạng chỗ nghỉ (thấp đến cao)"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/btn_star_asc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Xếp hạng chỗ nghỉ (cao đến thấp)"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/btn_star_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Điểm đánh giá của khách hàng"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/btn_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Giá (thấp đến cao)"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/btn_price_asc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Giá (cao đến thấp)"
+                android:textSize="@dimen/_13ssp" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/btn_price_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </worker8.com.github.radiogroupplus.RadioGroupPlus>
+</androidx.constraintlayout.widget.ConstraintLayout>

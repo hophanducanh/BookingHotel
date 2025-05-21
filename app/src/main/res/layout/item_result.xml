@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/_12sdp">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/image_view_pager"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_145sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_pager"
+        app:layout_constraintStart_toStartOf="@id/image_view_pager"
+        app:layout_constraintTop_toTopOf="@id/image_view_pager"
+        app:srcCompat="@drawable/ic_left" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_next"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_pager"
+        app:layout_constraintEnd_toEndOf="@id/image_view_pager"
+        app:layout_constraintTop_toTopOf="@id/image_view_pager"
+        app:srcCompat="@drawable/ic_right" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_hotel_name"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:maxLines="2"
+        android:text="Lam Anh Hotel Him Lam Vạn Phúc"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_pager" />
+
+
+    <LinearLayout
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view_pager">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_old_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="VND 2.987.996"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_10ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_new_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="VND 2.073.596"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/star"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hotel_name">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_star" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:id="@+id/frame_rating"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@drawable/card_border"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/tv_rating"
+        app:layout_constraintEnd_toStartOf="@id/tv_rating"
+        app:layout_constraintTop_toTopOf="@id/tv_rating">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_rating_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_medium"
+            android:text="8.5"
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Rất tốt"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_no_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Chưa có đánh giá"
+        android:visibility="gone"
+        android:textSize="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/star"
+        app:srcCompat="@drawable/ic_location" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Cách trung tâm 1,4km"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/ic_location"
+        app:layout_constraintStart_toEndOf="@id/ic_location"
+        app:layout_constraintTop_toTopOf="@id/ic_location" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
