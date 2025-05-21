@@ -71,12 +71,14 @@ interface ApiService {
 
     @GET("/profile")
     fun getProfile(
-        @Query("sortType") sortType: String? = null,
     ): Call<UserResponse>
 
 
-    @GET("/comments/location/{hotel_id}")
-    fun getComments(@Path("hotel_id") locationId: Int): Call<CommentResponse>
+    @GET("/comments/hotel/{hotel_id}")
+    fun getComments(
+        @Path("hotel_id") locationId: Int,
+        @Query("sortType") sortType: String? = null,
+    ): Call<CommentResponse>
 
     @Multipart
     @POST("comments")

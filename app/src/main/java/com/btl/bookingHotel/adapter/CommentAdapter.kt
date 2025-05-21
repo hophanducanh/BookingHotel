@@ -1,6 +1,5 @@
 package com.btl.bookingHotel.adapter
 
-import com.btl.bookingHotel.model.Comment
 import com.btl.bookinghotel.databinding.ItemCommentBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -10,7 +9,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.btl.bookingHotel.model.Comment
+import com.bumptech.glide.Glide
 
 class CommentAdapter(private val context: Context, private var comments: List<Comment>) :
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
@@ -46,6 +48,21 @@ class CommentAdapter(private val context: Context, private var comments: List<Co
         holder.binding.tvDate.text = displayDate
 
         holder.binding.tvRating.text = comment.rating_point.toString()
+
+        holder.binding.tvUserName.text = comment.user.user_name
+        holder.binding.tvComment.text = comment.comment
+
+        Glide.with(context)
+            .load("https://scaling-space-telegram-pqq5wq6pqg6c964q-5000.app.github.dev/" + comment.user.avatar_url)
+            .into(holder.binding.imgAvatar)
+
+        val imageList = comment.images
+        if (imageList.isNotEmpty()) {
+            val adapter = CommentImageAdapter(context, imageList)
+            holder.binding.listItem.adapter = adapter
+            holder.binding.listItem.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

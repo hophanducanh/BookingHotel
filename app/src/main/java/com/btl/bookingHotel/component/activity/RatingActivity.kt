@@ -1,6 +1,14 @@
 package com.btl.bookingHotel.component.activity
 
+import android.R
 import android.content.Intent
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.btl.bookingHotel.adapter.CommentAdapter
 import com.btl.bookingHotel.api.ApiClient
 import com.btl.bookingHotel.model.CommentResponse
 import com.btl.bookinghotel.databinding.ActivityRatingBinding
@@ -13,7 +21,29 @@ class RatingActivity : BaseActivity<ActivityRatingBinding>() {
     private lateinit var hotelName: String
     private lateinit var hotelAddress: String
     private lateinit var hotelFirstImage: String
+    private lateinit var commentAdapter: CommentAdapter
+    private val sortOptions =
+        listOf("Mới nhất", "Cũ nhất", "Đánh giá thấp nhất", "Đánh giá cao nhất")
+
     override fun initView() {
+        commentAdapter = CommentAdapter(this, emptyList())
+        binding.listItem.adapter = commentAdapter
+        binding.listItem.layoutManager = LinearLayoutManager(this)
+        binding.listItem.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+
+        val spinnerAdapter = ArrayAdapter(
+            this,
+            R.layout.simple_spinner_item,
+            sortOptions
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerOrder.adapter = spinnerAdapter
+        binding.spinnerOrder.setSelection(0)
     }
 
     override fun initData() {
@@ -33,29 +63,70 @@ class RatingActivity : BaseActivity<ActivityRatingBinding>() {
             intent.putExtra("hotel_name", hotelName)
             startActivity(intent)
         }
+
+        binding.spinnerOrder.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val sortType = when (position) {
+                    0 -> "newest"
+                    1 -> "oldest"
+                    2 -> "lowest"
+                    3 -> "highest"
+                    else -> "newest"
+                }
+
+                hotelId?.let { fetchComments(it, sortType) }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 
-    private fun fetchComments(hotelId: Int) {
+    private fun fetchComments(hotelId: Int, sortType: String) {
         val apiService = ApiClient.create(this)
-        apiService.getComments(hotelId).enqueue(object : Callback<CommentResponse> {
+        apiService.getComments(hotelId, sortType).enqueue(object : Callback<CommentResponse> {
             override fun onResponse(
                 call: Call<CommentResponse>,
                 response: Response<CommentResponse>
             ) {
                 if (response.isSuccessful && response.body() != null) {
-                    val commentResponse = response.body()!!
-                    val comments = commentResponse.data.comments
+                    val commentList = response.body()!!.data.comments
 
-                    if (comments.isEmpty()) {
+                    if (commentList.isNotEmpty()) {
+                        binding.tvAmountRating.text = "${commentList.size} đánh giá"
+                        binding.tvNoComment.visibility = View.GONE
+                        commentAdapter.setData(commentList)
                     } else {
+                        binding.tvAmountRating.text = "Chưa có đánh giá"
+                        binding.tvNoComment.visibility = View.VISIBLE
+                        binding.listItem.visibility = View.GONE
                     }
                 } else {
+                    val errorCode = response.code()
+                    val errorBody = response.errorBody()?.string()
+                    android.util.Log.e(
+                        "API_ERROR",
+                        "Lỗi phản hồi từ server - Code: $errorCode\nBody: $errorBody"
+                    )
+                    showError("Lỗi phản hồi từ server.")
                 }
             }
 
             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
+                android.util.Log.e("API_ERROR", "Không thể kết nối đến server", t)
+                showError("Không thể kết nối đến server.")
             }
         })
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        binding.tvNoComment.visibility = View.VISIBLE
+        binding.tvAmountRating.text = "Chưa có đánh giá"
     }
 
 

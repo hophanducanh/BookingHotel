@@ -40,7 +40,7 @@
             android:fontFamily="@font/roboto_light"
             android:text="Th 5, 3 thg 4, 2025"
             android:textColor="@color/black"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_13ssp" />
     </LinearLayout>
 
     <FrameLayout
@@ -66,16 +66,18 @@
         android:id="@+id/tv_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto_light"
         android:text="Nằm ở Hà Ðông, cách Trung tâm thương mại Vincom Nguyễn Chí Thanh 6.5 km và Sân vận động Quốc gia Mỹ Đình 7.4 km, Khách sạn Hera Hotel cung cấp chỗ nghỉ có sân hiên và chỗ đậu xe riêng miễn phí cho ......"
         android:textColor="@color/black"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_avatar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"

@@ -19,7 +19,7 @@ data class Comment(
     val id_comment: Int,
     val images: List<String>,
     val rating_point: Double,
-    val user_id: Int
+    val user: CommentUser
 )
 data class CommentData(
     val comments: List<Comment>,
@@ -35,6 +35,13 @@ data class CommentHotel(
     val hotel_star: Double,
     val images: List<String>,
     val location: CommentLocation
+)
+
+data class CommentUser(
+    val avatar_url: String,
+    val email: String,
+    val id: Int,
+    val user_name: String
 )
 
 data class CommentLocation(

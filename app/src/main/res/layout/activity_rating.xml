@@ -72,62 +72,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp">
 
+
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Chưa có đánh giá"
-                    android:visibility="gone"
-                    android:textSize="@dimen/_15ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <FrameLayout
-                    android:id="@+id/rating"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/card_border"
-                    android:backgroundTint="@color/colorSecondary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="8.5"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_15ssp" />
-                </FrameLayout>
-
-                <LinearLayout
+                    android:id="@+id/tv_amount_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toEndOf="@id/rating"
-                    app:layout_constraintTop_toTopOf="@id/rating">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rất tốt"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_13ssp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_checkin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="50 đánh giá"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
-                </LinearLayout>
+                    android:fontFamily="@font/roboto_light"
+                    android:text="50 đánh giá"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <FrameLayout
@@ -135,8 +92,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:backgroundTint="@color/colorSecondary"
                     android:background="@drawable/rating_border"
+                    android:backgroundTint="@color/colorSecondary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -156,26 +113,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:background="#D4D4D4"
-                app:layout_constraintTop_toBottomOf="@+id/btn_rating" />
+                android:background="#D4D4D4" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Sắp xếp đánh giá theo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+                <Spinner
+                    android:id="@+id/spinner_order"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/_3sdp"
+                    android:background="@drawable/border_spinner"
+                    android:spinnerMode="dropdown"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 tools:listitem="@layout/item_comment" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_no_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:layout_marginTop="@dimen/_100sdp"
                 android:layout_gravity="center"
-                android:visibility="gone"
+                android:layout_marginTop="@dimen/_100sdp"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Chưa có bình luận nào"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13ssp"
+                android:visibility="gone" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
