@@ -17,6 +17,13 @@ import java.text.DecimalFormat
 
 class HighestHotelAdapter(private val context: Context, private var hotels: List<HotelData>) :
     RecyclerView.Adapter<HighestHotelAdapter.HighestHotelViewHolder>() {
+
+    private var listener: ((HotelData) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (HotelData) -> Unit) {
+        this.listener = listener
+    }
+
     inner class HighestHotelViewHolder(val binding: ItemHighestHotelBinding) :
         RecyclerView.ViewHolder(binding.root)
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighestHotelViewHolder {
@@ -60,6 +67,10 @@ class HighestHotelAdapter(private val context: Context, private var hotels: List
                 )
             }
             holder.binding.star.addView(starView)
+        }
+
+        holder.binding.root.setOnClickListener {
+            listener?.invoke(hotel)
         }
     }
 

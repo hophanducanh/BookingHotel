@@ -70,7 +70,10 @@ interface ApiService {
     ): Call<RoomResponse>
 
     @GET("/profile")
-    fun getProfile(): Call<UserResponse>
+    fun getProfile(
+        @Query("sortType") sortType: String? = null,
+    ): Call<UserResponse>
+
 
     @GET("/comments/location/{hotel_id}")
     fun getComments(@Path("hotel_id") locationId: Int): Call<CommentResponse>

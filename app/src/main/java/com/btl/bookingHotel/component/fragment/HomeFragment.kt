@@ -10,7 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.btl.bookingHotel.adapter.HighestHotelAdapter
 import com.btl.bookingHotel.api.ApiClient
+import com.btl.bookingHotel.component.activity.DetailActivity
 import com.btl.bookingHotel.component.activity.SearchActivity
+import com.btl.bookingHotel.model.HotelData
 import com.btl.bookingHotel.model.LocationData
 import com.btl.bookingHotel.model.LocationResponse
 import com.btl.bookingHotel.utils.HotelViewModel
@@ -33,14 +35,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         hanoiAdapter = HighestHotelAdapter(requireContext(), mutableListOf())
         binding.listHighestHotelInHanoi.adapter = hanoiAdapter
         setupHotelList(4, hanoiAdapter)
+        hanoiAdapter.setOnItemClickListener { hotel ->
+            goToDetail(hotel)
+        }
 
         nhatrangAdapter = HighestHotelAdapter(requireContext(), mutableListOf())
         binding.listHighestHotelInNhatrang.adapter = nhatrangAdapter
         setupHotelList(9, nhatrangAdapter)
+        nhatrangAdapter.setOnItemClickListener { hotel ->
+            goToDetail(hotel)
+        }
 
         hcmAdapter = HighestHotelAdapter(requireContext(), mutableListOf())
         binding.listHighestHotelInHcm.adapter = hcmAdapter
         setupHotelList(6, hcmAdapter)
+        hcmAdapter.setOnItemClickListener { hotel ->
+            goToDetail(hotel)
+        }
+
     }
 
 
@@ -73,6 +85,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
             startActivity(intent)
         }
+
+
     }
 
     override fun getViewBinding(
@@ -81,6 +95,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ): FragmentHomeBinding {
         return FragmentHomeBinding.inflate(inflater)
     }
+
+    private fun goToDetail(hotel: HotelData) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra("hotelData", hotel)
+        startActivity(intent)
+    }
+
 
     private fun fetchCities() {
         ApiClient.create(requireContext()).getLocations()
