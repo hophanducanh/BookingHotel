@@ -53,7 +53,7 @@ class CommentAdapter(private val context: Context, private var comments: List<Co
         holder.binding.tvComment.text = comment.comment
 
         Glide.with(context)
-            .load("https://scaling-space-telegram-pqq5wq6pqg6c964q-5000.app.github.dev/" + comment.user.avatar_url)
+            .load("https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev" + comment.user.avatar_url)
             .into(holder.binding.imgAvatar)
 
         val imageList = comment.images

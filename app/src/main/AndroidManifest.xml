@@ -24,10 +24,10 @@
             android:name="com.btl.bookingHotel.OptionActivity"
             android:exported="false" />
         <activity
-            android:name="com.btl.bookingHotel.ProfileActivity"
+            android:name="com.btl.bookingHotel.component.activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.btl.bookingHotel.PointActivity"
+            android:name="com.btl.bookingHotel.component.activity.PointActivity"
             android:exported="false" />
         <activity
             android:name="com.btl.bookingHotel.component.activity.CommentActivity"

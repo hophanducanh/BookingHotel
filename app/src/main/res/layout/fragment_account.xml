@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="@id/img_avatar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_money"
+            android:id="@+id/btn_coupon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
@@ -98,7 +98,7 @@
         android:textSize="@dimen/_13ssp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_award"
+        android:id="@+id/btn_point"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"

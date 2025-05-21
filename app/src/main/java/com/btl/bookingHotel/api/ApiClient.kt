@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "https://scaling-space-telegram-pqq5wq6pqg6c964q-5000.app.github.dev/"
+    private const val BASE_URL = "https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/"
 
     fun create(context: Context): ApiService {
         val client = OkHttpClient.Builder()

@@ -57,6 +57,8 @@ class HighestHotelAdapter(private val context: Context, private var hotels: List
                 .into(holder.binding.mainImg)
         }
 
+        holder.binding.tvHotelName.text = hotel.hotel_name
+
         holder.binding.star.removeAllViews()
         repeat(hotel.hotel_star.toInt()) {
             val starView = AppCompatImageView(holder.binding.root.context).apply {

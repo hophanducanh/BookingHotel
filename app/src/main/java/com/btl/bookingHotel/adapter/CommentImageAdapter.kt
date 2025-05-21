@@ -24,7 +24,7 @@ class CommentImageAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val url =
-            "https://scaling-space-telegram-pqq5wq6pqg6c964q-5000.app.github.dev/" + images[position]
+            "https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/" + images[position]
         Glide.with(context).load(url).into(holder.binding.imageView)
     }
 }

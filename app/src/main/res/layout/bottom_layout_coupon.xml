@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
-        android:text="Chọn mã giảm giá"
+        android:text="Mã giảm giá của bạn"
         android:textColor="@color/black"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,33 +1,41 @@
 package com.btl.bookingHotel.component.fragment
 
-import android.R
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import com.btl.bookingHotel.component.activity.PointActivity
 import com.btl.bookingHotel.api.ApiClient
-import com.btl.bookingHotel.model.LocationResponse
+import com.btl.bookingHotel.dialog.CouponBottomSheetLayout
+import com.btl.bookingHotel.model.UserData
 import com.btl.bookingHotel.model.UserResponse
 import com.btl.bookinghotel.databinding.FragmentAccountBinding
 import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 
 class AccountFragment : BaseFragment<FragmentAccountBinding>() {
+    private var fetchedUser: UserData? = null
     override fun initView(view: View) {
         fetchProfile()
     }
 
     override fun initListener() {
+        binding.btnCoupon.setOnClickListener {
+            val bottomSheet = CouponBottomSheetLayout()
+            bottomSheet.show(childFragmentManager, "CouponBottomSheet")
+        }
+
+        binding.btnPoint.setOnClickListener {
+            val point = fetchedUser?.point ?: 0
+            val intent = Intent(requireContext(), PointActivity::class.java)
+            intent.putExtra("point", point)
+            startActivity(intent)
+        }
     }
 
     private fun fetchProfile() {
@@ -40,8 +48,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                 ) {
                     if (response.isSuccessful && response.body()?.status == "success") {
                         val data = response.body()!!.data
+                        fetchedUser = data
                         Glide.with(requireContext())
-                            .load("https://scaling-space-telegram-pqq5wq6pqg6c964q-5000.app.github.dev/" + data.avatar_url)
+                            .load("https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/" + data.avatar_url)
                             .into(binding.imgAvatar)
                         binding.tvUserName.text = "Xin chào, ${data?.user_name}"
                     }

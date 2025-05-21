@@ -4,6 +4,7 @@ import com.btl.bookingHotel.model.BookingRequest
 import com.btl.bookingHotel.model.BookingResponse
 import com.btl.bookingHotel.model.CommentRequest
 import com.btl.bookingHotel.model.CommentResponse
+import com.btl.bookingHotel.model.DiscountResponse
 import com.btl.bookingHotel.model.HotelResponse
 import com.btl.bookingHotel.model.LocationResponse
 import com.btl.bookingHotel.model.LoginRequest
@@ -91,6 +92,9 @@ interface ApiService {
 
     @GET("/get-discount")
     fun getMyDiscount(): Call<MyDiscountResponse>
+
+    @GET("/all-discounts")
+    fun getAllDiscount(): Call<DiscountResponse>
 
     @POST("bookings")
     fun createBooking(@Body booking: BookingRequest): Call<BookingResponse>

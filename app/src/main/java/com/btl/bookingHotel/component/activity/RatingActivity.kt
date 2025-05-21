@@ -84,6 +84,10 @@ class RatingActivity : BaseActivity<ActivityRatingBinding>() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun fetchComments(hotelId: Int, sortType: String) {
@@ -94,11 +98,13 @@ class RatingActivity : BaseActivity<ActivityRatingBinding>() {
                 response: Response<CommentResponse>
             ) {
                 if (response.isSuccessful && response.body() != null) {
-                    val commentList = response.body()!!.data.comments
+                    val commentData = response.body()!!.data
 
-                    if (commentList.isNotEmpty()) {
+                    if (commentData != null && commentData.comments.isNotEmpty()) {
+                        val commentList = commentData.comments
                         binding.tvAmountRating.text = "${commentList.size} đánh giá"
                         binding.tvNoComment.visibility = View.GONE
+                        binding.listItem.visibility = View.VISIBLE
                         commentAdapter.setData(commentList)
                     } else {
                         binding.tvAmountRating.text = "Chưa có đánh giá"
