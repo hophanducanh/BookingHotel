@@ -87,7 +87,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                         Glide.with(requireContext())
                             .load(Constants.BASE_URL + data.avatar_url)
                             .into(binding.imgAvatar)
-                        binding.tvUserName.text = "Xin chào, ${data?.user_name}"
+                        binding.tvUserName.text = "Xin chào, ${data?.user_name} !"
                     }
                 }
 

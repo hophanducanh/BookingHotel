@@ -7,10 +7,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.btl.bookingHotel.adapter.AvailableRoomAdapter
-import com.btl.bookingHotel.adapter.SearchHotelAdapter
 import com.btl.bookingHotel.api.ApiClient
+import com.btl.bookingHotel.dialog.ConfirmBookingDialog
 import com.btl.bookingHotel.dialog.CouponBottomSheetLayout
-import com.btl.bookingHotel.dialog.SortBottomSheetLayout
 import com.btl.bookingHotel.model.BookingRequest
 import com.btl.bookingHotel.model.BookingResponse
 import com.btl.bookingHotel.model.RoomData
@@ -90,51 +89,12 @@ class SelectedRoomActivity : BaseActivity<ActivitySelectedRoomBinding>() {
         }
 
         binding.btnDone.setOnClickListener {
-            val selectedRoom = adapter.getSelectedRoomNumber()
-            if (selectedRoom == null) {
-                Toast.makeText(this, "Vui lòng chọn phòng", Toast.LENGTH_SHORT).show()
-            } else {
-                if (startDate == null || endDate == null) {
-                    Toast.makeText(this, "Vui lòng chọn ngày nhận và trả phòng", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val checkIn = sdf.format(startDate!!.time)
-                val checkOut = sdf.format(endDate!!.time)
-                val adults = binding.tvPeople.text.toString().toIntOrNull() ?: 1
-                val kids = binding.tvKid.text.toString().toIntOrNull() ?: 0
-
-                val bookingRequest = BookingRequest(
-                    room_id = selectedRoom,
-                    number_of_people = adults,
-                    number_of_children = kids,
-                    check_in = checkIn,
-                    check_out = checkOut,
-                    user_discount_id = selectedDiscountId
-                )
-
-                ApiClient.create(this).createBooking(bookingRequest)
-                    .enqueue(object : Callback<BookingResponse> {
-                        override fun onResponse(call: Call<BookingResponse>, response: Response<BookingResponse>) {
-                            if (response.isSuccessful) {
-                                val intent = Intent(this@SelectedRoomActivity, CompleteBookingActivity::class.java)
-                                intent.putExtra("selected_room_number", selectedRoom)
-                                intent.putExtra("adults", adults)
-                                intent.putExtra("kids", kids)
-                                intent.putExtra("check_in", checkIn)
-                                intent.putExtra("check_out", checkOut)
-                                startActivity(intent)
-                            } else {
-                                Toast.makeText(this@SelectedRoomActivity, "Đặt phòng thất bại", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-
-                        override fun onFailure(call: Call<BookingResponse>, t: Throwable) {
-                            Toast.makeText(this@SelectedRoomActivity, "Lỗi mạng: ${t.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-            }
+            val dialog = ConfirmBookingDialog(
+                context = this,
+                onConfirm = { performBooking() },
+                onCancel = {  }
+            )
+            dialog.show()
         }
     }
 
@@ -192,6 +152,55 @@ class SelectedRoomActivity : BaseActivity<ActivitySelectedRoomBinding>() {
 
     override fun getViewBinding(): ActivitySelectedRoomBinding {
         return ActivitySelectedRoomBinding.inflate(layoutInflater)
+    }
+
+    private fun performBooking() {
+        val selectedRoom = adapter.getSelectedRoomNumber()
+        val selectedRoomNumberString = adapter.getSelectedRoomNumberString()
+        if (selectedRoom == null) {
+            Toast.makeText(this, "Vui lòng chọn phòng", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (startDate == null || endDate == null) {
+            Toast.makeText(this, "Vui lòng chọn ngày nhận và trả phòng", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val checkIn = sdf.format(startDate!!.time)
+        val checkOut = sdf.format(endDate!!.time)
+        val adults = binding.tvPeople.text.toString().toIntOrNull() ?: 1
+        val kids = binding.tvKid.text.toString().toIntOrNull() ?: 0
+
+        val bookingRequest = BookingRequest(
+            room_id = selectedRoom,
+            number_of_people = adults,
+            number_of_children = kids,
+            check_in = checkIn,
+            check_out = checkOut,
+            user_discount_id = selectedDiscountId
+        )
+
+        ApiClient.create(this).createBooking(bookingRequest)
+            .enqueue(object : Callback<BookingResponse> {
+                override fun onResponse(call: Call<BookingResponse>, response: Response<BookingResponse>) {
+                    if (response.isSuccessful) {
+                        val bookingData = response.body()!!.data
+
+                        val intent = Intent(this@SelectedRoomActivity, CompleteBookingActivity::class.java)
+                        intent.putExtra("booking_data", bookingData)
+                        intent.putExtra("selected_room_number", selectedRoomNumberString)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@SelectedRoomActivity, "Đặt phòng thất bại", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<BookingResponse>, t: Throwable) {
+                    Toast.makeText(this@SelectedRoomActivity, "Lỗi mạng: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private fun fetchAvailableRooms() {

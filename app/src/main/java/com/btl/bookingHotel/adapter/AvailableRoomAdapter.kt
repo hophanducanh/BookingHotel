@@ -67,4 +67,8 @@ class AvailableRoomAdapter(
     }
 
     fun getSelectedRoomNumber(): Int? = selectedRoomNumber
+
+    fun getSelectedRoomNumberString(): String? {
+        return if (selectedPosition != -1) rooms[selectedPosition].room_number else null
+    }
 }

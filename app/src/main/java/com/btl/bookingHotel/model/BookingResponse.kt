@@ -1,10 +1,12 @@
 package com.btl.bookingHotel.model
 
+import java.io.Serializable
+
 data class BookingResponse(
     val data: BookingData,
     val message: String,
     val status: String
-)
+) : Serializable
 
 data class BookingInfo(
     val base_price: Int,
@@ -18,7 +20,7 @@ data class BookingInfo(
     val number_of_people: Int,
     val number_of_rooms: Int,
     val total_price: Double
-)
+) : Serializable
 
 data class BookingData(
     val booking_id: Int,
@@ -26,7 +28,7 @@ data class BookingData(
     val hotel_info: HotelInfo,
     val room_info: RoomInfo,
     val user_points: Int
-)
+) : Serializable
 
 data class DiscountInfo(
     val description: String,
@@ -34,7 +36,7 @@ data class DiscountInfo(
     val discount_name: String,
     val discount_value_percent: Double,
     val point_required: Int
-)
+) : Serializable
 
 data class HotelInfo(
     val address: String,
@@ -42,10 +44,10 @@ data class HotelInfo(
     val hotel_id: Int,
     val hotel_name: String,
     val star: Double
-)
+) : Serializable
 
 data class RoomInfo(
     val room_id: Int,
     val room_price: Int,
     val room_type: String
-)
+) : Serializable
