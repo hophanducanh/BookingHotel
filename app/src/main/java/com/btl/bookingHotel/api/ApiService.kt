@@ -2,6 +2,8 @@ package com.btl.bookingHotel.api
 
 import com.btl.bookingHotel.model.BookingRequest
 import com.btl.bookingHotel.model.BookingResponse
+import com.btl.bookingHotel.model.ChangePasswordRequest
+import com.btl.bookingHotel.model.ChangePasswordResponse
 import com.btl.bookingHotel.model.CommentRequest
 import com.btl.bookingHotel.model.CommentResponse
 import com.btl.bookingHotel.model.CouponResponse
@@ -115,4 +117,9 @@ interface ApiService {
         @Part("country") country: RequestBody?,
         @Part avatar: MultipartBody.Part?
     ): Call<ProfileResponse>
+
+    @POST("change-password")
+    fun changePassword(
+        @Body request: ChangePasswordRequest
+    ): Call<ChangePasswordResponse>
 }

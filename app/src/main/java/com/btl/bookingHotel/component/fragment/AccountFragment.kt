@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.btl.bookingHotel.component.activity.PointActivity
 import com.btl.bookingHotel.api.ApiClient
+import com.btl.bookingHotel.component.activity.ChangePasswordActivity
+import com.btl.bookingHotel.component.activity.LoginActivity
 import com.btl.bookingHotel.component.activity.ProfileActivity
 import com.btl.bookingHotel.dialog.CouponBottomSheetLayout
 import com.btl.bookingHotel.model.UserData
@@ -49,6 +51,25 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                 }
                 startActivity(intent)
             }
+        }
+
+
+        binding.btnLogOut.setOnClickListener {
+            val sharedPreferences = requireContext().getSharedPreferences("Prefs", android.content.Context.MODE_PRIVATE)
+            sharedPreferences.edit().putBoolean("isLoggedIn", false).apply()
+
+            val userPrefs = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
+            userPrefs.edit().remove("access_token").apply()
+
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+            requireActivity().finish()
+        }
+
+        binding.btnPassword.setOnClickListener {
+            startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
         }
     }
 

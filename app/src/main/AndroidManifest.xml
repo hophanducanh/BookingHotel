@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BookingHotel"
         tools:targetApi="31">
         <activity
+            android:name="com.btl.bookingHotel.component.activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name="com.btl.bookingHotel.component.activity.CompleteBookingActivity"
             android:exported="false" />
         <activity
