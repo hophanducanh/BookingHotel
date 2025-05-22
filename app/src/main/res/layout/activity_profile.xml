@@ -68,14 +68,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_user_name"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/roboto_bold"
             android:text="Nguyễn Văn A"
+            android:background="@color/white"
             android:textColor="@color/black"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +124,7 @@
             android:elevation="@dimen/_3sdp">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/et_user_name"
+                android:id="@+id/et_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -157,6 +158,7 @@
             android:textSize="@dimen/_13ssp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
@@ -171,7 +173,6 @@
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="01/01/1990"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -194,7 +195,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/roboto_bold"
-            android:text="Giới tính"
+            android:text="Số điện thoại"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp" />
 
@@ -206,14 +207,14 @@
             android:background="@drawable/card_border"
             android:elevation="@dimen/_3sdp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sex"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Nam"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -230,6 +231,27 @@
                 app:srcCompat="@drawable/ic_more" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/btn_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginVertical="@dimen/_20sdp"
+            android:elevation="@dimen/_3sdp"
+            android:background="@drawable/card_border"
+            android:backgroundTint="@color/colorPrimary">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Cập nhật"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+        </FrameLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

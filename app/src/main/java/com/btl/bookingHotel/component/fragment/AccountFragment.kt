@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.btl.bookingHotel.component.activity.PointActivity
 import com.btl.bookingHotel.api.ApiClient
+import com.btl.bookingHotel.component.activity.ProfileActivity
 import com.btl.bookingHotel.dialog.CouponBottomSheetLayout
 import com.btl.bookingHotel.model.UserData
 import com.btl.bookingHotel.model.UserResponse
@@ -36,6 +37,18 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
             val intent = Intent(requireContext(), PointActivity::class.java)
             intent.putExtra("point", point)
             startActivity(intent)
+        }
+
+        binding.btnInfo.setOnClickListener{
+            fetchedUser?.let { user ->
+                val intent = Intent(requireContext(), ProfileActivity::class.java).apply {
+                    putExtra("avatar_url", user.avatar_url)
+                    putExtra("email", user.email)
+                    putExtra("phone_number", user.phone_number)
+                    putExtra("user_name", user.user_name)
+                }
+                startActivity(intent)
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import com.btl.bookingHotel.model.LocationResponse
 import com.btl.bookingHotel.model.LoginRequest
 import com.btl.bookingHotel.model.LoginResponse
 import com.btl.bookingHotel.model.MyDiscountResponse
+import com.btl.bookingHotel.model.ProfileResponse
 import com.btl.bookingHotel.model.RedeemCouponRequest
 import com.btl.bookingHotel.model.RegisterResponse
 import com.btl.bookingHotel.model.RoomResponse
@@ -103,4 +104,15 @@ interface ApiService {
 
     @POST("bookings")
     fun createBooking(@Body booking: BookingRequest): Call<BookingResponse>
+
+    @Multipart
+    @retrofit2.http.PUT("/profile")
+    fun updateUserProfile(
+        @Part("user_name") userName: RequestBody?,
+        @Part("email") email: RequestBody?,
+        @Part("phone_number") phoneNumber: RequestBody?,
+        @Part("date_of_birth") dateOfBirth: RequestBody?,
+        @Part("country") country: RequestBody?,
+        @Part avatar: MultipartBody.Part?
+    ): Call<ProfileResponse>
 }
