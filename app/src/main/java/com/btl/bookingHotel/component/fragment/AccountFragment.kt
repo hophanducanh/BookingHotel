@@ -11,6 +11,7 @@ import com.btl.bookingHotel.api.ApiClient
 import com.btl.bookingHotel.dialog.CouponBottomSheetLayout
 import com.btl.bookingHotel.model.UserData
 import com.btl.bookingHotel.model.UserResponse
+import com.btl.bookingHotel.utils.Constants
 import com.btl.bookinghotel.databinding.FragmentAccountBinding
 import com.bumptech.glide.Glide
 import retrofit2.Call
@@ -50,7 +51,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                         val data = response.body()!!.data
                         fetchedUser = data
                         Glide.with(requireContext())
-                            .load("https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/" + data.avatar_url)
+                            .load(Constants.BASE_URL + data.avatar_url)
                             .into(binding.imgAvatar)
                         binding.tvUserName.text = "Xin chào, ${data?.user_name}"
                     }

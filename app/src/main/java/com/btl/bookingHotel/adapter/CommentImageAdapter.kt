@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.btl.bookingHotel.utils.Constants
 import com.btl.bookinghotel.databinding.ItemImageBinding
 import com.bumptech.glide.Glide
 
@@ -24,7 +25,7 @@ class CommentImageAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val url =
-            "https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/" + images[position]
+            Constants.BASE_URL + images[position]
         Glide.with(context).load(url).into(holder.binding.imageView)
     }
 }

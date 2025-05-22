@@ -114,7 +114,6 @@ class SelectedRoomActivity : BaseActivity<ActivitySelectedRoomBinding>() {
                     user_discount_id = selectedDiscountId
                 )
 
-                // Gọi API
                 ApiClient.create(this).createBooking(bookingRequest)
                     .enqueue(object : Callback<BookingResponse> {
                         override fun onResponse(call: Call<BookingResponse>, response: Response<BookingResponse>) {

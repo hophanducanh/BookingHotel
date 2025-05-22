@@ -19,6 +19,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private var hotelName: String = ""
     private var currentSortType: SortBottomSheetLayout.SortType? = null
 
+    private var minPrice: Int? = null
+    private var maxPrice: Int? = null
+    private var starValue: Int? = null
+    private var ratingValue: Double? = null
+
     override fun initView() {
         locationId = intent?.getIntExtra("locationId", -1) ?: -1
         address = intent?.getStringExtra("address") ?: ""
@@ -85,6 +90,29 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        supportFragmentManager.setFragmentResultListener("filter_result", this) { _, bundle ->
+            minPrice = bundle.getInt("min_price")
+            maxPrice = bundle.getInt("max_price")
+            starValue = bundle.getInt("star")
+            ratingValue = bundle.getDouble("rating")
+
+            starValue = if (starValue == 0) null else starValue
+            ratingValue = if (ratingValue == 0.0) null else ratingValue
+
+            performSearch(
+                locationId = locationId,
+                address = address,
+                hotelName = hotelName,
+                sortBy = null,
+                sortOrder = null,
+                hotelStar = starValue,
+                newPriceMin = minPrice,
+                newPriceMax = maxPrice,
+                userRatingMin = ratingValue
+            )
+        }
+
     }
 
     private fun sortHotels(sortType: SortBottomSheetLayout.SortType) {
@@ -96,21 +124,41 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             SortBottomSheetLayout.SortType.STAR_DESC -> "hotel_star" to "desc"
         }
 
-        performSearch(locationId, address, hotelName, sortBy, sortOrder)
+        performSearch(
+            locationId = locationId,
+            address = address,
+            hotelName = hotelName,
+            sortBy = sortBy,
+            sortOrder = sortOrder,
+            hotelStar = starValue,
+            newPriceMin = minPrice,
+            newPriceMax = maxPrice,
+            userRatingMin = ratingValue
+        )
     }
 
     @SuppressLint("SetTextI18n")
     private fun performSearch(
-        locationId: Int, address: String, hotelName: String, sortBy: String? = null,
-        sortOrder: String? = null
+        locationId: Int = this.locationId,
+        address: String = this.address,
+        hotelName: String = this.hotelName,
+        sortBy: String? = null,
+        sortOrder: String? = null,
+        hotelStar: Int? = starValue,
+        newPriceMin: Int? = minPrice,
+        newPriceMax: Int? = maxPrice,
+        userRatingMin: Double? = ratingValue?.toDouble()
     ) {
-
         HotelViewModel(this).fetchHotels(
             locationId = locationId,
             address = address,
             hotelName = hotelName,
             sortBy = sortBy,
             sortOrder = sortOrder,
+            hotelStar = hotelStar,
+            newPriceMin = newPriceMin,
+            newPriceMax = newPriceMax,
+            userRatingMin = userRatingMin,
             paging = false,
             onSuccess = { hotels ->
                 adapter.setData(hotels)

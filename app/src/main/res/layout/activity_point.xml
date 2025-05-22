@@ -112,11 +112,12 @@
             android:textSize="@dimen/_13ssp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginVertical="@dimen/_10sdp"
-            tools:listitem="@layout/item_point"
+            tools:listitem="@layout/item_coupon"
             android:background="@drawable/card_border"
             android:elevation="@dimen/_3sdp" />
 

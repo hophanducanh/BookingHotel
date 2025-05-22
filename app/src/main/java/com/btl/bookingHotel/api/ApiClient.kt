@@ -1,12 +1,13 @@
 package com.btl.bookingHotel.api
 
 import android.content.Context
+import com.btl.bookingHotel.utils.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "https://special-space-disco-975v7wwppxv9h7457-5000.app.github.dev/"
+    private const val BASE_URL = Constants.BASE_URL
 
     fun create(context: Context): ApiService {
         val client = OkHttpClient.Builder()

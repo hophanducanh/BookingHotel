@@ -4,12 +4,14 @@ import com.btl.bookingHotel.model.BookingRequest
 import com.btl.bookingHotel.model.BookingResponse
 import com.btl.bookingHotel.model.CommentRequest
 import com.btl.bookingHotel.model.CommentResponse
+import com.btl.bookingHotel.model.CouponResponse
 import com.btl.bookingHotel.model.DiscountResponse
 import com.btl.bookingHotel.model.HotelResponse
 import com.btl.bookingHotel.model.LocationResponse
 import com.btl.bookingHotel.model.LoginRequest
 import com.btl.bookingHotel.model.LoginResponse
 import com.btl.bookingHotel.model.MyDiscountResponse
+import com.btl.bookingHotel.model.RedeemCouponRequest
 import com.btl.bookingHotel.model.RegisterResponse
 import com.btl.bookingHotel.model.RoomResponse
 import com.btl.bookingHotel.model.UserResponse
@@ -95,6 +97,9 @@ interface ApiService {
 
     @GET("/all-discounts")
     fun getAllDiscount(): Call<DiscountResponse>
+
+    @POST("change-discount")
+    fun changeDiscount(@Body request: RedeemCouponRequest): Call<CouponResponse>
 
     @POST("bookings")
     fun createBooking(@Body booking: BookingRequest): Call<BookingResponse>
